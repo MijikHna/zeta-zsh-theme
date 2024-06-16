@@ -25,6 +25,7 @@ local highlight_bg=$bg[red]
 
 local zeta='ζ'
 
+
 # Machine name.
 function get_box_name {
     if [ -f ~/.box-name ]; then
@@ -96,8 +97,8 @@ function get_time_stamp {
 function get_space {
     local str=$1$2
     local zero='%([BSUbfksu]|([FB]|){*})'
-    local len=${#${(S%%)str//$~zero/}}
-    local size=$(( $COLUMNS - $len - 1 ))
+    local len=$(printf "%b" "${(S%%)str//$~zero/}" | wc -c)
+    local size=$(( $COLUMNS - $len))
     local space=""
     while [[ $size -gt 0 ]]; do
         space="$space "
